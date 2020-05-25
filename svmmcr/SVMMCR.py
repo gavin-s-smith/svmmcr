@@ -142,11 +142,11 @@ class SVMMCR(object):
         print('88888888888888888888888888888888888888888888888')
 
         rcode = """
-            
+            st = system.time({
 
             p1_sets = list("admissible"= as.integer(c(3,4,5)), "inadmissible" = as.integer(c(1,2)))
 
-            min_cv_loss = {{0:.20f}} # value from CV
+            min_cv_loss = 2.808806 # value from CV
             eps_multiplier <- 0.1
 
             # te denotes "test" data rather than "train" (tr)
@@ -182,6 +182,6 @@ class SVMMCR(object):
                     get_empirical_MCR(eps=eps_ref_te, precomputed = pc, tol_mcr=2^-10)
                     )
 
-          
-            """.format(min_cv_loss)
+            })
+            """
         r(rcode)
