@@ -137,6 +137,9 @@ class SVMMCR(object):
 
         (r_constraint <- norm_RKHS(model=w_ref, K_D=ssts_tr$reg_matrix))
         """.format(sigma, alpha)
+        print('88888888888888888888888888888888888888888888888')
+        print(rcode)
+        print('88888888888888888888888888888888888888888888888')
         r(rcode)
 
         print('88888888888888888888888888888888888888888888888')
