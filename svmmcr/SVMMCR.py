@@ -142,7 +142,18 @@ class SVMMCR(object):
         # pred_RKHS <- function(X=X, kern_fun=kern_fun, w_ref)
         # """
         rcode = """
-        preds = kernel_regression_prediction(X=X, X_ref=X_ref, y_ref=y_ref, kern_fun=kern_fun)
+        kernel_regression_prediction <- function(X, X_ref, y_ref, kern_fun){
+            #Simple kernel smoother estimator
+            K <- as.matrix(kernelMatrix(x=X,y=X_ref, kernel=kern_fun))
+            W <- K / tcrossprod(rowSums(K), rep(1,length(y_ref)))
+            c(W %*% y_ref)
+
+            # !! Note - See KRLS package to see how they handle binary covariates
+                # However, this package does not appear to let you specify a present reference dataset; it always uses all your data.
+
+        }
+
+        preds <- kernel_regression_prediction(X=X, X_ref=X_ref, y_ref=y_ref, kern_fun=kern_fun)
         """
         r(rcode)
         print(r("preds"))
