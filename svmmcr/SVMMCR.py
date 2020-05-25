@@ -240,7 +240,7 @@ class SVMMCR(object):
             """.format(','.join([str(x+1) for x in vars2permute]), min_cv_loss) # +1 due to R indexing
         r(rcode)
 
-        with localconverter(ro.default_converter + ri2numpy.converter):
-            mcr = ro.conversion.rpy2py(r("mcr_te$permuted$range"))
+        
+        mcr = ri2numpy(r("mcr_te$permuted$range")) 
 
-        return mcr
+    return mcr
