@@ -91,7 +91,8 @@ class SVMMCR(object):
         self.cv_min_loss = r("min_cv_loss")
         self.cv_alpha = r("alpha_cv")
         self.cv_sigma = r("sigma_regression")
-
+        print('+++++++++++++++++++++++++++++++++++')
+        print('cv loss: {} alpha cv: {} sigma: {}'.format(self.cv_min_loss, self.cv_alpha, self.cv_sigma))
     
     def get_mcr(self, X, y):
         # Fits the reference model and then performs MCR
