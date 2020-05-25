@@ -240,5 +240,6 @@ class SVMMCR(object):
             """.format(','.join([str(x+1) for x in vars2permute]), min_cv_loss) # +1 due to R indexing
         r(rcode)
 
+        print('\n-------------->{}'.format(r("mcr_te")))
         print('-------------->{}'.format(r("mcr_te$permuted$plus$mcr")))
         print('-------------->{}'.format(r("mcr_te$permuted$minus$mcr")))
