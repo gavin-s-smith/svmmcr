@@ -95,7 +95,7 @@ class SVMMCR(object):
         print('+++++++++++++++++++++++++++++++++++')
         print('cv loss: {} alpha cv: {} sigma: {}'.format(self.cv_min_loss, self.cv_alpha, self.cv_sigma))
     
-    def get_mcr(self, X, y):
+    def get_mcr(self, X, y, vars2permute):
         # Fits the reference model and then performs MCR
 
         with localconverter(ro.default_converter + pandas2ri.converter):
@@ -141,12 +141,14 @@ class SVMMCR(object):
 
         print('88888888888888888888888888888888888888888888888')
 
+    
+
         rcode = """
             st = system.time({{
 
-            p1_sets = list("admissible"= as.integer(c(3,4,5)), "inadmissible" = as.integer(c(1,2)))
+            p1_sets = list("permuted"= as.integer(c({0})))
 
-            min_cv_loss = {0:.20f} # value from CV
+            min_cv_loss = {1:.20f} # value from CV
             eps_multiplier <- 0.1
 
             # te denotes "test" data rather than "train" (tr)
@@ -183,5 +185,5 @@ class SVMMCR(object):
                     )
 
             }})
-            """.format(min_cv_loss)
+            """.format(','.join(vars2permute), min_cv_loss)
         r(rcode)
