@@ -7,5 +7,5 @@ setup(name='svmmcr',
       author='Gavin Smith',
       author_email='gavin.smith@nottingham.ac.uk',
       license='MIT',
-      packages=['svmmcr'],
+      packages=[],
       zip_safe=False)
