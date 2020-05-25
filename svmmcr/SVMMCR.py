@@ -88,9 +88,10 @@ class SVMMCR(object):
         """
         r(rcode)
 
-        self.cv_min_loss = r("min_cv_loss")
-        self.cv_alpha = r("alpha_cv")
-        self.cv_sigma = r("sigma_regression")
+        with localconverter(ro.default_converter + numpy2ri.converter):
+            self.cv_min_loss = r("min_cv_loss")
+            self.cv_alpha = r("alpha_cv")
+            self.cv_sigma = r("sigma_regression")
         print('+++++++++++++++++++++++++++++++++++')
         print('cv loss: {} alpha cv: {} sigma: {}'.format(self.cv_min_loss, self.cv_alpha, self.cv_sigma))
     
