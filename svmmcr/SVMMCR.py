@@ -144,7 +144,7 @@ class SVMMCR(object):
 
             p1_sets = list("admissible"= as.integer(c(3,4,5)), "inadmissible" = as.integer(c(1,2)))
 
-            min_cv_loss = {0} # value from CV
+            min_cv_loss = {{0}} # value from CV
             eps_multiplier <- 0.1
 
             # te denotes "test" data rather than "train" (tr)
