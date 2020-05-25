@@ -139,9 +139,6 @@ class SVMMCR(object):
         """.format(sigma, alpha)
         r(rcode)
 
-        print('88888888888888888888888888888888888888888888888')
-
-    
 
         rcode = """
             st = system.time({{
@@ -185,5 +182,5 @@ class SVMMCR(object):
                     )
 
             }})
-            """.format(','.join(vars2permute), min_cv_loss)
+            """.format(','.join([str(x) for x in vars2permute]), min_cv_loss)
         r(rcode)
