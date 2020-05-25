@@ -142,15 +142,15 @@ class SVMMCR(object):
         print('88888888888888888888888888888888888888888888888')
 
         rcode = """
-            st = system.time({
+            st = system.time({{
 
             p1_sets = list("admissible"= as.integer(c(3,4,5)), "inadmissible" = as.integer(c(1,2)))
 
-            min_cv_loss = 2.808806 # value from CV
+            min_cv_loss = {0:.20f} # value from CV
             eps_multiplier <- 0.1
 
             # te denotes "test" data rather than "train" (tr)
-            te_kernel_precomputed <- lapply(p1_sets, function(set){
+            te_kernel_precomputed <- lapply(p1_sets, function(set){{
                 precompute_mcr_objects_and_functions(
                     y=y-mu_tr, X=X,
                     p1=set,
@@ -166,7 +166,7 @@ class SVMMCR(object):
                         warn_duplicate = TRUE,
                         warn_dropped = TRUE)
                     )
-            })
+            }})
 
             MR_ref_te <- lapply(te_kernel_precomputed, function(pc)
                 get_MR_general(model=w_ref,
@@ -182,6 +182,6 @@ class SVMMCR(object):
                     get_empirical_MCR(eps=eps_ref_te, precomputed = pc, tol_mcr=2^-10)
                     )
 
-            })
-            """
+            }})
+            """.format(min_cv_loss)
         r(rcode)
