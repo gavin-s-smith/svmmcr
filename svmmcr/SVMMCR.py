@@ -139,6 +139,20 @@ class SVMMCR(object):
         """.format(sigma, alpha)
         r(rcode)
 
+
+    def predict(self, X, y):
+        # Predict using the reference model
+        with localconverter(ro.default_converter + pandas2ri.converter):
+            r_X = ro.conversion.py2rpy(X) 
+        with localconverter(ro.default_converter + numpy2ri.converter):
+            r_X = ro.conversion.py2rpy(X.values) 
+            r_y = ro.conversion.py2rpy(y) 
+            r_X_cols = ro.conversion.py2rpy(X.columns.values)
+
+        r.assign('X', r_X)
+        r.assign('X_cols',list(X.columns.values))
+        r("colnames(X) <- X_cols")
+        r.assign('y', r_y)
         # rcode = """
         # pred_RKHS <- function(X=X, kern_fun=kern_fun, w_ref)
         # """
@@ -163,9 +177,20 @@ class SVMMCR(object):
 
         return preds
 
-    def get_mcr(self, vars2permute):
+    def get_mcr(self, X, y, vars2permute):
         # Performs MCR
 
+        with localconverter(ro.default_converter + pandas2ri.converter):
+            r_X = ro.conversion.py2rpy(X) 
+        with localconverter(ro.default_converter + numpy2ri.converter):
+            r_X = ro.conversion.py2rpy(X.values) 
+            r_y = ro.conversion.py2rpy(y) 
+            r_X_cols = ro.conversion.py2rpy(X.columns.values)
+
+        r.assign('X', r_X)
+        r.assign('X_cols',list(X.columns.values))
+        r("colnames(X) <- X_cols")
+        r.assign('y', r_y)
      
         min_cv_loss = self.cv_min_loss
 
