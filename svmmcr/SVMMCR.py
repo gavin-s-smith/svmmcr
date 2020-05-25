@@ -241,6 +241,6 @@ class SVMMCR(object):
         r(rcode)
 
         
-        mcr = ri2numpy(r("mcr_te$permuted$range")) 
+        mcr = numpy2ri.ri2numpy(r("mcr_te$permuted$range")) 
 
         return mcr
