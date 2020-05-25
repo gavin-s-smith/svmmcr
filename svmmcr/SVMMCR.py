@@ -130,6 +130,7 @@ class SVMMCR(object):
 
         ###### Train f_s reference model
         X_ref <- X[!duplicated(X),]
+        y_ref <- y[!duplicated(X)]
 
         ssts_tr <- get_suff_stats_kernel( y=y-mu_tr, X=X,kern_fun=kern_fun,dat_ref=X_ref)
         w_ref <- fit_lm_regularized(suff_stats =ssts_tr, tol = 10^-9, alpha = alpha_cv)
