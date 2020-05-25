@@ -241,6 +241,6 @@ class SVMMCR(object):
         r(rcode)
 
         with localconverter(ro.default_converter + numpy2ri.converter):
-            mcr = ro.conversion.rpy2py(r("$permuted$range"))
+            mcr = ro.conversion.rpy2py(r("mcr_te$permuted$range"))
 
         return mcr
