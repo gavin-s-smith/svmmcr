@@ -95,9 +95,9 @@ class SVMMCR(object):
         print('+++++++++++++++++++++++++++++++++++')
         print('cv loss: {} alpha cv: {} sigma: {}'.format(self.cv_min_loss, self.cv_alpha, self.cv_sigma))
     
-    def get_mcr(self, X, y, vars2permute):
-        # Fits the reference model and then performs MCR
 
+    def fit_reference_model(self, X, y):
+        # Fits the reference model
         with localconverter(ro.default_converter + pandas2ri.converter):
             r_X = ro.conversion.py2rpy(X) 
         with localconverter(ro.default_converter + numpy2ri.converter):
@@ -112,7 +112,6 @@ class SVMMCR(object):
 
         sigma = self.cv_sigma
         alpha = self.cv_alpha
-        min_cv_loss = self.cv_min_loss
 
         rcode = """
 
@@ -139,7 +138,19 @@ class SVMMCR(object):
         """.format(sigma, alpha)
         r(rcode)
 
+        rcode = """
+        out = pred_RKHS <- function(X=X, kern_fun=kern_fun, w_ref)
+        """
+        r(rcode)
+        print(r("out"))
 
+    def get_mcr(self, vars2permute):
+        # Performs MCR
+
+     
+        min_cv_loss = self.cv_min_loss
+
+        
         rcode = """
             st = system.time({{
 
