@@ -139,6 +139,8 @@ class SVMMCR(object):
         """.format(sigma, alpha)
         r(rcode)
 
+        print('88888888888888888888888888888888888888888888888')
+
         rcode = """
             st = system.time({
 
