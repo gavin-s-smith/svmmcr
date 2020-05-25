@@ -157,7 +157,11 @@ class SVMMCR(object):
         preds <- kernel_regression_prediction(X=X, X_ref=X_ref, y_ref=y_ref, kern_fun=kern_fun)
         """
         r(rcode)
-        print(r("preds"))
+
+        with localconverter(ro.default_converter + numpy2ri.converter):
+            preds = ro.conversion.rpy2py(r("preds")) 
+
+        return preds
 
     def get_mcr(self, vars2permute):
         # Performs MCR
