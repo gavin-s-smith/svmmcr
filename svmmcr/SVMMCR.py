@@ -137,15 +137,12 @@ class SVMMCR(object):
 
         (r_constraint <- norm_RKHS(model=w_ref, K_D=ssts_tr$reg_matrix))
         """.format(sigma, alpha)
-        print('88888888888888888888888888888888888888888888888')
-        print(rcode)
-        print('88888888888888888888888888888888888888888888888')
         r(rcode)
 
         print('88888888888888888888888888888888888888888888888')
 
         rcode = """
-            st = system.time({
+            
 
             p1_sets = list("admissible"= as.integer(c(3,4,5)), "inadmissible" = as.integer(c(1,2)))
 
@@ -185,6 +182,6 @@ class SVMMCR(object):
                     get_empirical_MCR(eps=eps_ref_te, precomputed = pc, tol_mcr=2^-10)
                     )
 
-            })
+          
             """.format(min_cv_loss)
         r(rcode)
