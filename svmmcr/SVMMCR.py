@@ -39,6 +39,7 @@ class SVMMCR(object):
         # tr denotes "training" data
         mu_tr <- mean(y)
 
+        p <- dim(X)[2]
         len_s <- 40
 
         sigma_seq <- p^seq(-5,5,length=len_s)
