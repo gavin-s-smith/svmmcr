@@ -85,6 +85,7 @@ class SVMMCR(object):
         min_cv_loss <- min(cv_KLS,na.rm=TRUE)
         alpha_cv <- alpha_seq[which(cv_KLS==min_cv_loss)[1]]
         """
+        r(rcode)
 
         self.cv_min_loss = r("min_cv_loss")
         self.cv_alpha = r("alpha_cv")
