@@ -138,11 +138,14 @@ class SVMMCR(object):
         """.format(sigma, alpha)
         r(rcode)
 
+        # rcode = """
+        # pred_RKHS <- function(X=X, kern_fun=kern_fun, w_ref)
+        # """
         rcode = """
-        out = pred_RKHS <- function(X=X, kern_fun=kern_fun, w_ref)
+        preds = kernel_regression_prediction(X=X, X_ref=X_ref, y_ref=y_ref, kern_fun=kern_fun)
         """
         r(rcode)
-        print(r("out"))
+        print(r("preds"))
 
     def get_mcr(self, vars2permute):
         # Performs MCR
