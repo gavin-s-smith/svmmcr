@@ -116,8 +116,8 @@ class SVMMCR(object):
 
         rcode = """
 
-        sigma_regression = {0}
-        alpha_cv = {1}
+        sigma_regression = {0:.f}
+        alpha_cv = {1:.f}
 
         kern_fun <- rbfdot(sigma_regression)
         mean(duplicated(X))
@@ -149,7 +149,7 @@ class SVMMCR(object):
 
             p1_sets = list("admissible"= as.integer(c(3,4,5)), "inadmissible" = as.integer(c(1,2)))
 
-            min_cv_loss = {{0}} # value from CV
+            min_cv_loss = {{0:.f}} # value from CV
             eps_multiplier <- 0.1
 
             # te denotes "test" data rather than "train" (tr)
