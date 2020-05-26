@@ -255,6 +255,7 @@ class SVMMCR(object):
 
             }})
             """.format(','.join([str(x+1) for x in vars2permute]), min_cv_loss, rashomon_eps) # +1 due to R indexing
+        print(rcode)
         r(rcode)
 
 
