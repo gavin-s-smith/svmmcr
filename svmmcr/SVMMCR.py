@@ -240,7 +240,7 @@ class SVMMCR(object):
             """.format(','.join([str(x+1) for x in vars2permute]), min_cv_loss) # +1 due to R indexing
         r(rcode)
 
-        
+        eps_ref_ts = np.asarray(r("eps_ref_te"))
         mcr = np.asarray(r("mcr_te$permuted$range")) 
 
-        return mcr
+        return mcr,eps_ref_ts
