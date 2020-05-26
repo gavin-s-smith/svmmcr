@@ -182,8 +182,16 @@ class SVMMCR(object):
 
         return preds
 
-    def get_mcr(self, X, y, vars2permute):
+    # if rashomon_eps < 0
+    def get_mcr(self, X, y, vars2permute, rashomon_eps = -99999):
         # Performs MCR
+
+        if type(rashomon_eps) == str and rashomon_eps == 'auto':
+            rashomon_eps = -99999
+        elif rashomon_eps < 0
+            pass #ok
+        else:
+            raise Exception('Incorrectly specified rashomon eps')
 
         with localconverter(ro.default_converter + pandas2ri.converter):
             r_X = ro.conversion.py2rpy(X) 
@@ -237,12 +245,15 @@ class SVMMCR(object):
             (eps_ref_te <- c(loss_ref_te + eps_multiplier * min_cv_loss))
             # tag-w_S-held-out-Err
 
+            if {2} > 0:
+                eps_ref_te = {2:.20f}
+
             mcr_te <- lapply(te_kernel_precomputed, function(pc) 
                     get_empirical_MCR(eps=eps_ref_te, precomputed = pc, tol_mcr=2^-10)
                     )
 
             }})
-            """.format(','.join([str(x+1) for x in vars2permute]), min_cv_loss) # +1 due to R indexing
+            """.format(','.join([str(x+1) for x in vars2permute]), min_cv_loss, rashomon_eps) # +1 due to R indexing
         r(rcode)
 
 
