@@ -16,6 +16,11 @@ class SVMMCR(object):
         self.cv_alpha = 0.002424462
         self.cv_min_loss = 2.808806
 
+    def disable_R_warnings(self):
+        r("options(warn=-1)")
+    
+    def enable_R_warnings(self):
+        r("options(warn=0)")
 
     def learn_reference_model_params(self, X, y):
         # Due to computational complexity we are not going to try a grid search
