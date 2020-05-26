@@ -188,7 +188,7 @@ class SVMMCR(object):
 
         if type(rashomon_eps) == str and rashomon_eps == 'auto':
             rashomon_eps = -99999
-        elif rashomon_eps < 0
+        elif rashomon_eps < 0:
             pass #ok
         else:
             raise Exception('Incorrectly specified rashomon eps')
