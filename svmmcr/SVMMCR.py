@@ -183,12 +183,12 @@ class SVMMCR(object):
         return preds
 
     # if rashomon_eps < 0
-    def get_mcr(self, X, y, vars2permute, rashomon_eps = -99999):
+    def get_mcr(self, X, y, vars2permute, rashomon_eps = 'auto'):
         # Performs MCR
 
         if type(rashomon_eps) == str and rashomon_eps == 'auto':
             rashomon_eps = -99999
-        elif rashomon_eps < 0:
+        elif rashomon_eps >= 0:
             pass #ok
         else:
             raise Exception('Incorrectly specified rashomon eps')
