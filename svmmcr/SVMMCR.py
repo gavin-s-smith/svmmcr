@@ -246,9 +246,9 @@ class SVMMCR(object):
             # tag-w_S-held-out-Err
 
             rashmomon_eps <- {2:.20f}
-            if rashmomon_eps > 0:
+            if( rashmomon_eps > 0){{
                 eps_ref_te = rashmomon_eps
-
+            }}
             mcr_te <- lapply(te_kernel_precomputed, function(pc) 
                     get_empirical_MCR(eps=eps_ref_te, precomputed = pc, tol_mcr=2^-10)
                     )
