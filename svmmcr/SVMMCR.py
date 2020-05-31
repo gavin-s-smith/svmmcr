@@ -183,7 +183,8 @@ class SVMMCR(object):
         return preds
 
     # if rashomon_eps < 0
-    def get_mcr(self, X, y, vars2permute, rashomon_eps = 'auto'):
+    # @param nrep_sample setting `nrep_sample=2` corresponds to using e_divide to approximate e_switch. Increasing `nrep_sample` further increases the number of terms used in the approximation of e_switch. If `nrep_sample =n,` all permutations are returned.
+    def get_mcr(self, X, y, vars2permute, rashomon_eps = 'auto', nrep_sample = 2):
         # Performs MCR
 
         if type(rashomon_eps) == str and rashomon_eps == 'auto':
@@ -192,6 +193,9 @@ class SVMMCR(object):
             pass #ok
         else:
             raise Exception('Incorrectly specified rashomon eps')
+
+
+            
 
         with localconverter(ro.default_converter + pandas2ri.converter):
             r_X = ro.conversion.py2rpy(X) 
@@ -226,7 +230,7 @@ class SVMMCR(object):
                         reg_threshold=r_constraint,
                         kern_fun = kern_fun,
                         dat_ref=X_ref,
-                        nrep_sample=2,
+                        nrep_sample={3},
                         tol = 10^-8,
                         verbose=TRUE,
                         warn_psd=TRUE,
@@ -254,7 +258,7 @@ class SVMMCR(object):
                     )
 
             }})
-            """.format(','.join([str(x+1) for x in vars2permute]), min_cv_loss, rashomon_eps) # +1 due to R indexing
+            """.format(','.join([str(x+1) for x in vars2permute]), min_cv_loss, rashomon_eps, nrep_sample) # +1 due to R indexing
 
         r(rcode)
 
