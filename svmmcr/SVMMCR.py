@@ -185,7 +185,7 @@ class SVMMCR(object):
     # if rashomon_eps < 0
     # Comment
     # @param nrep_sample setting `nrep_sample=2` corresponds to using e_divide to approximate e_switch. Increasing `nrep_sample` further increases the number of terms used in the approximation of e_switch. If `nrep_sample =n,` all permutations are returned.
-    def get_mcr(self, X, y, vars2permute, rashomon_eps = 'auto', nrep_sample = 2):
+    def get_mcr(self, X, y, vars2permute, rashomon_eps = 'auto', nrep_sample = 2, maxiter_BS = 400):
         # Performs MCR
 
         if type(rashomon_eps) == str and rashomon_eps == 'auto':
@@ -255,11 +255,11 @@ class SVMMCR(object):
                 eps_ref_te = rashmomon_eps
             }}
             mcr_te <- lapply(te_kernel_precomputed, function(pc) 
-                    get_empirical_MCR(eps=eps_ref_te, precomputed = pc, tol_mcr=2^-10)
+                    get_empirical_MCR(eps=eps_ref_te, precomputed = pc, tol_mcr=2^-10, maxiter_BS = {4})
                     )
 
             }})
-            """.format(','.join([str(x+1) for x in vars2permute]), min_cv_loss, rashomon_eps, nrep_sample) # +1 due to R indexing
+            """.format(','.join([str(x+1) for x in vars2permute]), min_cv_loss, rashomon_eps, nrep_sample, maxiter_BS) # +1 due to R indexing
 
         r(rcode)
 
