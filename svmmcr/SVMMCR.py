@@ -183,6 +183,7 @@ class SVMMCR(object):
         return preds
 
     # if rashomon_eps < 0
+    # Comment
     # @param nrep_sample setting `nrep_sample=2` corresponds to using e_divide to approximate e_switch. Increasing `nrep_sample` further increases the number of terms used in the approximation of e_switch. If `nrep_sample =n,` all permutations are returned.
     def get_mcr(self, X, y, vars2permute, rashomon_eps = 'auto', nrep_sample = 2):
         # Performs MCR
